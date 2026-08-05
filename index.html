@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poliglota</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Vertical control bar -->
+
+<div class="control-bar">
+    <a href="#" id="home-btn"><img src="images/control-panel-icons/home-icon.png" alt="Home" class="control-icon"></a>
+
+    <!-- Student Book Dropdown -->
+    <div class="dropdown">
+        <img src="images/control-panel-icons/students-book-icon.png" alt="Students Book" class="control-icon dropdown-btn">
+        <div class="dropdown-content" id="students-book-dropdown">
+            <a href="#" data-unit="1">Unit 1</a>
+            <a href="#" data-unit="2">Unit 2</a>
+            <a href="#" data-unit="3">Unit 3</a>
+            <a href="#" data-unit="4">Unit 4</a>
+            <a href="#" data-unit="5">Unit 5</a>
+            <a href="#" data-unit="6">Unit 6</a>
+            <a href="#" data-unit="7">Unit 7</a>
+            <a href="#" data-unit="8">Unit 8</a>
+            <a href="#" data-unit="9">Unit 9</a>
+            <a href="#" data-unit="10">Unit 10</a>
+            <a href="#" data-unit="11">Unit 11</a>
+            <a href="#" data-unit="12">Unit 12</a>
+        </div>
+    </div>
+
+    <!-- Activity Book Dropdown -->
+    <div class="dropdown">
+        <img src="images/control-panel-icons/activity-book-icon.png" alt="Activity Book" class="control-icon dropdown-btn">
+        <div class="dropdown-content" id="activity-book-dropdown">
+            <a href="#" data-unit="1">Unit 1</a>
+            <a href="#" data-unit="2">Unit 2</a>
+            <a href="#" data-unit="3">Unit 3</a>
+            <a href="#" data-unit="4">Unit 4</a>
+            <a href="#" data-unit="5">Unit 5</a>
+            <a href="#" data-unit="6">Unit 6</a>
+            <a href="#" data-unit="7">Unit 7</a>
+            <a href="#" data-unit="8">Unit 8</a>
+            <a href="#" data-unit="9">Unit 9</a>
+            <a href="#" data-unit="10">Unit 10</a>
+            <a href="#" data-unit="11">Unit 11</a>
+            <a href="#" data-unit="12">Unit 12</a>
+
+        </div>
+    </div>
+
+<!-- PRESENTATION BUTTONS -->
+    </a>
+    <a href="#" id="audio-btn"><img src="images/control-panel-icons/audio-icon.png" alt="Audios" class="control-icon"></a>
+    <a href="#"><img src="images/control-panel-icons/video-icon.png" alt="Videos" class="control-icon"></a>
+   <a href="#" id="edit-btn">
+    <img src="images/control-panel-icons/edit-icon.png" alt="Edit" class="control-icon"></a>
+    <a href="#" id="whiteboard-btn">
+    <img src="images/control-panel-icons/whiteboard-icon.png" alt="Whiteboard" class="control-icon">
+   </a>
+   <a href="#" id="games-btn">
+    <img src="images/control-panel-icons/games-icon.png" alt="Games" class="control-icon">
+</a>
+<div class="control-logo">
+        <img src="images/logo.png" alt="Logo">
+    </div>
+</div>
+
+<!-- Slide container -->
+<div class="slide-container">
+    <div class="slide-wrapper">
+    <img id="slide-image" src="" alt="Slide Image">
+    <canvas id="edit-canvas"></canvas>
+</div>
+    <button id="prev-btn">&#9664;</button>
+    <button id="next-btn">&#9654;</button>
+</div>
+<!-- WHITEBOARD -->
+<div id="whiteboard">
+    <canvas id="whiteboard-canvas"></canvas>
+</div>
+<!-- Audio list -->
+<div id="audio-list-container"></div>
+
+<!-- Audio player (hidden by default) -->
+<audio id="slide-audio" controls style="display:none;">
+    <source id="audio-source" src="" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<!-- Audio player (hidden by default) -->
+<audio id="slide-audio" controls style="display:none;">
+    <source id="audio-source" src="" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<!-- Video player (hidden by default) -->
+<video id="slide-video" controls style="display:none; max-width:80%; max-height:70%; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2000;">
+    <source id="video-source" src="" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<!-- Hide Video Button -->
+<button id="hide-video-btn" style="display:none; position: fixed; top: 10%; left: 120px; z-index:2001; padding:4px 8px;">Hide Video</button>
+<!-- Hide Player Button -->
+<button id="hide-audio-btn" style="display:none; position: fixed; bottom: 90px; left: 120px; z-index:2001; padding:4px 8px;">Hide Player</button>
+<!-- ==========================
+     EDIT TRAY
+========================== -->
+<div id="edit-tray">
+    <button class="edit-tool-btn" id="pencil-tool">✏️</button>
+
+    <div id="pencil-size-menu">
+    <div class="size-option" data-size="2"></div>
+    <div class="size-option" data-size="5"></div>
+    <div class="size-option" data-size="10"></div>
+
+</div>
+
+    <button class="edit-tool-btn" id="pen-tool">🖊️</button>
+    <button class="edit-tool-btn" id="eraser-tool">🧽</button>
+    <button class="edit-tool-btn" id="highlight-tool">🖍️</button>
+    <button class="edit-tool-btn" id="text-tool">🔤</button>
+    <button class="edit-tool-btn" id="clear-tool">🗑️</button>
+    
+</button>
+</div>
+<!-- ==========================
+     GAMES HUB
+========================== -->
+
+<div id="games-hub">
+
+    <div class="game-card" data-game="hangman">
+        Hangman
+    </div>
+
+    <div class="game-card" data-game="poliglota-around">
+        Poliglota Around
+    </div>
+
+    <div class="game-card" data-game="scattergories">
+        Scattergories
+    </div>
+
+    <div class="game-card" data-game="trivia">
+        Trivia
+    </div>
+
+</div>
+<!-- ==========================
+     GAME VIEWER
+========================== -->
+
+<div id="game-viewer">
+
+    <iframe id="game-frame"></iframe>
+
+</div>
+
+<button id="hide-game-btn">
+    Close Game
+</button>
+<script src="js/script.js"></script>
+</body>
+</html>
