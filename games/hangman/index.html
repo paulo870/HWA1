@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Hangman</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+<button id="fullscreen-btn">
+    Fullscreen
+</button>
+    <div class="game-container">
+
+        <h1>Hangman</h1>
+
+        <div id="level-display">
+            Level 1
+        </div>
+
+        <div id="hint">
+            Hint goes here
+        </div>
+<div id="hangman-container">
+<!-- RESULT POPUP -->
+
+<div id="result-popup">
+
+    <div id="popup-content">
+
+        <h2 id="popup-message">
+            YOU WIN!
+        </h2>
+
+        <div id="popup-word">
+            APPLE
+        </div>
+
+        <button id="popup-button">
+            Continue
+        </button>
+
+    </div>
+
+</div>
+<svg
+    id="hangman-svg"
+    width="300"
+    height="350"
+    viewBox="0 0 300 350">
+
+    <!-- GALLOWS -->
+
+    <line x1="40" y1="320" x2="140" y2="320" class="gallows-line"/>
+
+    <line x1="90" y1="20" x2="90" y2="320" class="gallows-line"/>
+
+    <line x1="90" y1="20" x2="200" y2="20" class="gallows-line"/>
+
+    <line x1="200" y1="20" x2="200" y2="60" class="gallows-line"/>
+
+    <!-- HEAD -->
+
+    <circle
+        id="head"
+        cx="200"
+        cy="90"
+        r="30"
+        class="hangman-part"/>
+
+    <!-- BODY -->
+
+    <line
+        id="body"
+        x1="200"
+        y1="120"
+        x2="200"
+        y2="210"
+        class="hangman-part"/>
+
+    <!-- LEFT ARM -->
+
+    <line
+        id="left-arm"
+        x1="200"
+        y1="145"
+        x2="160"
+        y2="180"
+        class="hangman-part"/>
+
+    <!-- RIGHT ARM -->
+
+    <line
+        id="right-arm"
+        x1="200"
+        y1="145"
+        x2="240"
+        y2="180"
+        class="hangman-part"/>
+
+    <!-- LEFT LEG -->
+
+    <line
+        id="left-leg"
+        x1="200"
+        y1="210"
+        x2="165"
+        y2="270"
+        class="hangman-part"/>
+
+    <!-- RIGHT LEG -->
+
+    <line
+        id="right-leg"
+        x1="200"
+        y1="210"
+        x2="235"
+        y2="270"
+        class="hangman-part"/>
+
+</svg>
+
+</div>
+        <div id="word-display">
+            _ _ _ _ _
+        </div>
+
+        <div id="attempts">
+            Attempts Left: 6
+        </div>
+<div id="score">
+    Score: 0
+</div>
+        <div id="keyboard"></div>
+
+        <button id="new-game-btn">
+            New Word
+        </button>
+
+        <div id="message"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

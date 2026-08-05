@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Trivia</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+<!-- ==========================
+     FULLSCREEN BUTTON
+========================== -->
+
+<button id="fullscreen-btn">
+    Fullscreen
+</button>
+
+<!-- ==========================
+     UNIT SELECTION SCREEN
+========================== -->
+
+<div id="unit-screen"
+     class="screen active">
+
+    <div class="game-container">
+
+        <h1>Trivia</h1>
+
+        <h2>Select a Unit</h2>
+
+        <div id="unit-grid"></div>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+     PLAYER SCREEN
+========================== -->
+
+<div id="player-screen"
+     class="screen">
+
+    <div class="game-container">
+
+        <h1>Players</h1>
+
+        <div class="player-settings">
+
+            <label for="player-count">
+                Number of Players
+            </label>
+
+            <select id="player-count">
+
+                <option value="1">1</option>
+
+                <option value="2">2</option>
+
+                <option value="3">3</option>
+
+                <option value="4">4</option>
+
+                <option value="5">5</option>
+
+                <option value="6">6</option>
+
+                <option value="7">7</option>
+
+                <option value="8">8</option>
+
+                <option value="9">9</option>
+
+                <option value="10">10</option>
+
+            </select>
+
+        </div>
+
+        <div id="player-inputs"></div>
+
+        <button id="start-btn">
+            Start Game
+        </button>
+
+    </div>
+
+</div>
+<!-- ==========================
+     TOPIC SCREEN
+========================== -->
+
+<div id="topic-screen"
+     class="screen">
+
+    <div class="game-container">
+
+        <h1>Select Topic</h1>
+
+        <div id="topic-grid">
+
+            <div class="topic-card"
+                 data-topic="Vocabulary">
+
+                Vocabulary
+
+            </div>
+
+            <div class="topic-card"
+                 data-topic="Grammar">
+
+                Grammar
+
+            </div>
+
+            <div class="topic-card"
+                 data-topic="Business Communication">
+
+                Business Communication
+
+            </div>
+
+            <div class="topic-card"
+                 data-topic="All">
+
+                All
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ==========================
+     WHEEL SCREEN
+========================== -->
+
+<div id="wheel-screen"
+     class="screen">
+
+    <div class="game-container">
+
+        <h1>Player Order</h1>
+        
+        <div id="wheel-pointer"></div>
+
+        <canvas id="wheel"
+                width="500"
+                height="500">
+        </canvas>
+
+        <br><br>
+
+        <button id="spin-btn">
+            SPIN
+        </button>
+
+        <div id="wheel-result"></div>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+     GAME SCREEN
+========================== -->
+
+<div id="game-screen"
+     class="screen">
+
+    <div class="game-container">
+
+        <h1>Trivia</h1>
+
+        <div id="current-player">
+            Player Turn
+        </div>
+
+        <div id="score-board"></div>
+
+        <div id="question-box">
+
+            <div id="question-word">
+                WORD
+            </div>
+
+        </div>
+
+        <div id="answer-buttons"></div>
+
+    </div>
+
+</div>
+<!-- ==========================
+     FINAL SCREEN
+========================== -->
+
+<div id="final-screen"
+     class="screen">
+
+    <div class="game-container">
+
+        <h1>
+            Final Results
+        </h1>
+
+        <div id="final-results"></div>
+
+    </div>
+
+</div>
+<!-- ==========================
+     SCRIPT
+========================== -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,347 @@
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1e607a,
+            #48e082
+        );
+
+    height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+}
+
+.game-container {
+
+    width: 95%;
+    max-width: 1200px;
+
+    text-align: center;
+
+    background: rgba(0,0,0,0.25);
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 20px rgba(0,0,0,0.4);
+}
+
+h1 {
+
+    font-size: 50px;
+
+    margin-bottom: 10px;
+}
+
+#level-display {
+
+    font-size: 24px;
+
+    margin-bottom: 20px;
+}
+
+#hint {
+
+    font-size: 22px;
+
+    margin-bottom: 25px;
+}
+
+#word-display {
+
+    font-size: 50px;
+
+    letter-spacing: 10px;
+
+    margin-bottom: 30px;
+
+    font-weight: bold;
+}
+
+#attempts {
+
+    font-size: 24px;
+
+    margin-bottom: 30px;
+}
+
+#keyboard {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(9, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+}
+
+.letter-btn {
+
+    padding: 15px;
+
+    font-size: 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background: white;
+
+    color: #1e607a;
+
+    font-weight: bold;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+.letter-btn:hover {
+
+    transform: scale(1.08);
+}
+
+.letter-btn:disabled {
+
+    background: #999;
+
+    color: white;
+
+    cursor: not-allowed;
+}
+
+#new-game-btn {
+
+    padding: 14px 24px;
+
+    font-size: 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    background: #1e607a;
+
+    color: white;
+}
+
+#message {
+
+    margin-top: 25px;
+
+    font-size: 28px;
+
+    font-weight: bold;
+}
+#fullscreen-btn {
+
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    padding: 12px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #1e607a;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    z-index: 9999;
+}
+
+#fullscreen-btn:hover {
+
+    transform: scale(1.05);
+}
+/* ==========================
+   HANGMAN SVG
+========================== */
+
+#hangman-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: 20px 0;
+}
+
+#hangman-svg {
+
+    width: 300px;
+
+    height: 350px;
+
+    overflow: visible;
+}
+
+/* GALLOWS */
+
+.gallows-line {
+
+    stroke: white;
+
+    stroke-width: 8;
+
+    stroke-linecap: round;
+}
+
+/* BODY PARTS */
+
+.hangman-part {
+
+    stroke: white;
+
+    stroke-width: 8;
+
+    stroke-linecap: round;
+
+    fill: none;
+
+    display: none;
+}
+#score {
+
+    font-size: 24px;
+
+    margin-bottom: 20px;
+
+    font-weight: bold;
+}
+/* ==========================
+   RESULT POPUP
+========================== */
+
+#result-popup {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.75);
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 99999;
+}
+
+#popup-content {
+
+    background: white;
+
+    color: #1e607a;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    min-width: 350px;
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,0.5);
+
+    animation: popupShow 0.3s ease;
+}
+
+#popup-message {
+
+    font-size: 42px;
+
+    margin-bottom: 20px;
+}
+
+#popup-word {
+
+    font-size: 50px;
+
+    font-weight: bold;
+
+    margin-bottom: 30px;
+
+    color: #48e082;
+}
+
+#popup-button {
+
+    padding: 14px 30px;
+
+    font-size: 22px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    background: #1e607a;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+#popup-button:hover {
+
+    transform: scale(1.05);
+}
+
+@keyframes popupShow {
+
+    from {
+
+        transform: scale(0.7);
+
+        opacity: 0;
+    }
+
+    to {
+
+        transform: scale(1);
+
+        opacity: 1;
+    }
+}
+#new-game-btn {
+
+    display: none;
+}

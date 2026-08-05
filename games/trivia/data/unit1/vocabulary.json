@@ -1,0 +1,27 @@
+[
+    {
+        "question": "agenda",
+
+        "options": [
+            "meeting plan",
+            "salary",
+            "printer",
+            "office"
+        ],
+
+        "answer": "meeting plan"
+    },
+
+    {
+        "question": "budget",
+
+        "options": [
+            "money plan",
+            "employee",
+            "computer",
+            "manager"
+        ],
+
+        "answer": "money plan"
+    }
+]
