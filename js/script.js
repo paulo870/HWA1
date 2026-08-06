@@ -85,7 +85,7 @@ function loadImage(src) {
 function loadHome() {
     currentImages = [];
     currentIndex = 0;
-    loadImage("images/homepage.jpeg");
+    loadImage("images/homepage.jpg");
     prevBtn.style.display = "none";
     nextBtn.style.display = "none";
 }
@@ -118,7 +118,7 @@ function loadStudentUnit(unitNumber) {
     }
 
     pageNumbers.forEach(num => {
-        currentImages.push(basePath + "page" + num + ".JPG");
+        currentImages.push(basePath + "page" + num + ".jpg");
     });
 
     loadImage(currentImages[currentIndex]);
@@ -154,7 +154,7 @@ function loadActivityUnit(unitNumber) {
     }
 
     pageNumbers.forEach(num => {
-        currentImages.push(basePath + "page" + num + ".JPG");
+        currentImages.push(basePath + "page" + num + ".jpg");
     });
 
     if (currentImages.length > 1) {
