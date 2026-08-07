@@ -313,15 +313,36 @@ audioBtn.addEventListener("click", function(e) {
     audioListContainer.innerHTML = "";
     audioListContainer.style.display = "flex";
 
-    if (currentImages.length === 0) return;
+   if (!currentImages || currentImages.length === 0) {
+    audioListContainer.style.display = "none";
+    return;
+}
 
-    const pageSrc = currentImages[currentIndex];
+const pageSrc = currentImages[currentIndex];
 
-    // Determine if Student or Activity Book
-    let bookType;
-    if (pageSrc.includes("student-book-pages")) bookType = "student";
-    else if (pageSrc.includes("activity-book-pages")) bookType = "activity";
-    else return;
+if (!pageSrc) {
+    console.error("Audio error: current page is undefined.", {
+        currentImages,
+        currentIndex
+    });
+
+    audioListContainer.style.display = "none";
+    return;
+}
+
+// Determine if Student or Activity Book
+let bookType;
+
+if (pageSrc.includes("student-book-pages")) {
+    bookType = "student";
+} 
+else if (pageSrc.includes("activity-book-pages")) {
+    bookType = "activity";
+} 
+else {
+    audioListContainer.style.display = "none";
+    return;
+}
 
     // Extract unit number
     const unitMatch = pageSrc.match(/unit_(\d+)/i);
@@ -865,7 +886,7 @@ function resizeEditCanvas() {
     editCanvas.style.top = slideImage.offsetTop + "px";
 
     redrawStrokes();
-    rerenderAllTextBoxes();
+   
 }
 
 function resizeWhiteboardCanvas() {
