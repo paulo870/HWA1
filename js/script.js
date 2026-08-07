@@ -433,11 +433,10 @@ videoPlayer.addEventListener("dblclick", () => {
 });
 
 // Define videos for Unit 1
-// Define videos for Unit 1
 const unitVideos = {
     1: {
         7: ["Headway-Openers---Beginner---Unit-1"],
-        10: ["Hw5e-Beginner-U01---Hello!"]
+        10: ["Hw5e-Beginner-U01---Hello!"],
         },
     3: {
         24: ["br2_004_v1_1","br2_004_v1_2"],
