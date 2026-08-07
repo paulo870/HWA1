@@ -383,7 +383,7 @@ audioBtn.addEventListener("click", function(e) {
 
         btn.addEventListener("click", () => {
             const folder = bookType === "student" ? "student_book_audios" : "activity_book_audios";
-            audioSource.src = `audios/${folder}/unit_${unit}/${track}.mp3`;
+            audioSource.src = `audio/${folder}/unit_${unit}/${track}.mp3`;
             audioPlayer.load();
             showAudioPlayer(); // <-- use the new function
             audioPlayer.controls = true;
