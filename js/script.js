@@ -234,32 +234,149 @@ nextBtn.addEventListener("click", () => {
 });
 
 // ==========================
-// CTRL + WHEEL ZOOM
+// ZOOM SYSTEM
 // ==========================
-slideContainer.addEventListener("wheel", function(e) {
-    if (!e.ctrlKey) return;
-    e.preventDefault();
 
-    if (e.deltaY < 0) currentScale += 0.1;
-    else currentScale -= 0.1;
-    if (currentScale < 0.1) currentScale = 0.1;
+// Minimum and maximum zoom
+const MIN_ZOOM = 0.1;
+const MAX_ZOOM = 5;
 
-    slideImage.style.width = slideImage.naturalWidth * currentScale + "px";
-    slideImage.style.height = slideImage.naturalHeight * currentScale + "px";
+// Apply zoom ONLY to the slide image
+function applyZoom() {
+
+    if (!slideImage.naturalWidth || !slideImage.naturalHeight) {
+        return;
+    }
+
+    slideImage.style.width =
+        (slideImage.naturalWidth * currentScale) + "px";
+
+    slideImage.style.height =
+        (slideImage.naturalHeight * currentScale) + "px";
 
     resizeEditCanvas();
-    
-    function resizeEditCanvas(){
-
-    const rect = slideImage.getBoundingClientRect();
-
-    editCanvas.width = rect.width;
-    editCanvas.height = rect.height;
-
-    editCanvas.style.left = slideImage.offsetLeft + "px";
-    editCanvas.style.top = slideImage.offsetTop + "px";
-
 }
+
+
+// ==========================
+// COMPUTER — CTRL + MOUSE WHEEL
+// ==========================
+
+slideContainer.addEventListener("wheel", function(e) {
+
+    if (!e.ctrlKey) return;
+
+    e.preventDefault();
+
+    if (e.deltaY < 0) {
+
+        currentScale += 0.1;
+
+    } else {
+
+        currentScale -= 0.1;
+    }
+
+    currentScale = Math.max(
+        MIN_ZOOM,
+        Math.min(MAX_ZOOM, currentScale)
+    );
+
+    applyZoom();
+
+}, { passive: false });
+
+
+// ==========================
+// ANDROID / TOUCH — PINCH ZOOM
+// ==========================
+
+let pinchStartDistance = null;
+let pinchStartScale = 1;
+
+
+// Calculate distance between two fingers
+function getTouchDistance(touch1, touch2) {
+
+    const dx = touch2.clientX - touch1.clientX;
+    const dy = touch2.clientY - touch1.clientY;
+
+    return Math.sqrt(
+        dx * dx + dy * dy
+    );
+}
+
+
+// Start pinch
+slideContainer.addEventListener("touchstart", function(e) {
+
+    if (e.touches.length !== 2) return;
+
+    e.preventDefault();
+
+    pinchStartDistance = getTouchDistance(
+        e.touches[0],
+        e.touches[1]
+    );
+
+    // Remember the zoom level when the pinch begins
+    pinchStartScale = currentScale;
+
+}, { passive: false });
+
+
+// Continue pinch
+slideContainer.addEventListener("touchmove", function(e) {
+
+    if (e.touches.length !== 2) return;
+
+    e.preventDefault();
+
+    const currentDistance = getTouchDistance(
+        e.touches[0],
+        e.touches[1]
+    );
+
+    if (!pinchStartDistance) return;
+
+    // How much the fingers moved apart/together
+    const scaleChange =
+        currentDistance / pinchStartDistance;
+
+    // Calculate new zoom
+    currentScale =
+        pinchStartScale * scaleChange;
+
+    // Limit zoom
+    currentScale = Math.max(
+        MIN_ZOOM,
+        Math.min(MAX_ZOOM, currentScale)
+    );
+
+    applyZoom();
+
+}, { passive: false });
+
+
+// Finish pinch
+slideContainer.addEventListener("touchend", function(e) {
+
+    if (e.touches.length < 2) {
+
+        pinchStartDistance = null;
+
+        // currentScale is deliberately NOT reset
+        // The zoom remains exactly where the user left it.
+    }
+
+}, { passive: false });
+
+
+// Also handle cancelled touches
+slideContainer.addEventListener("touchcancel", function() {
+
+    pinchStartDistance = null;
+
 }, { passive: false });
 
 // ==========================
