@@ -1,102 +1,75 @@
 import crypto from "crypto";
 
-function createSignature(payload, secret) {
+function createToken(secret) {
+    const timestamp = Date.now().toString();
 
-    return crypto
+    const signature = crypto
         .createHmac("sha256", secret)
-        .update(payload)
+        .update(timestamp)
         .digest("hex");
 
+    return `${timestamp}.${signature}`;
 }
 
-function createSession(secret) {
+function passwordsMatch(input, actual) {
+    const inputBuffer = Buffer.from(input);
+    const actualBuffer = Buffer.from(actual);
 
-    const timestamp = Date.now();
-
-    const payload = String(timestamp);
-
-    const signature = createSignature(payload, secret);
-
-    return `${payload}.${signature}`;
-
-}
-
-function safeCompare(a, b) {
-
-    const aBuffer = Buffer.from(a);
-    const bBuffer = Buffer.from(b);
-
-    if (aBuffer.length !== bBuffer.length) {
+    if (inputBuffer.length !== actualBuffer.length) {
         return false;
     }
 
-    return crypto.timingSafeEqual(aBuffer, bBuffer);
-
+    return crypto.timingSafeEqual(
+        inputBuffer,
+        actualBuffer
+    );
 }
 
 export default function handler(req, res) {
 
     if (req.method !== "POST") {
-
         return res.status(405).json({
-            error: "Method not allowed."
+            error: "Method not allowed"
         });
-
     }
 
-    const configuredPassword =
+    const password =
         process.env.POLIGLOTA_ACCESS_PASSWORD;
 
-    const sessionSecret =
+    const secret =
         process.env.POLIGLOTA_SESSION_SECRET;
 
-    if (!configuredPassword || !sessionSecret) {
-
+    if (!password || !secret) {
         console.error(
-            "Authentication environment variables are missing."
+            "Missing authentication environment variables."
         );
 
         return res.status(500).json({
-            error: "Authentication system is not configured."
+            error: "Authentication is not configured."
         });
-
     }
 
     const submittedPassword =
         req.body?.password;
 
-    if (
-        typeof submittedPassword !== "string" ||
-        submittedPassword.length === 0
-    ) {
-
+    if (typeof submittedPassword !== "string") {
         return res.status(400).json({
-            error: "Please enter your password."
+            error: "Password is required."
         });
-
     }
 
-    const passwordCorrect =
-        safeCompare(
-            submittedPassword,
-            configuredPassword
-        );
-
-    if (!passwordCorrect) {
-
+    if (!passwordsMatch(submittedPassword, password)) {
         return res.status(401).json({
             error: "Incorrect password."
         });
-
     }
 
-    const session =
-        createSession(sessionSecret);
+    const token = createToken(secret);
 
     res.setHeader(
         "Set-Cookie",
         [
-            `poliglota_session=${session}`,
+            `poliglota_session=${token}`,
             "Path=/",
             "HttpOnly",
             "Secure",
@@ -108,5 +81,4 @@ export default function handler(req, res) {
     return res.status(200).json({
         success: true
     });
-
-}
+        }
