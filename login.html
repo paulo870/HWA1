@@ -1,150 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Poliglota | Secure Access</title>
 
-    <link rel="stylesheet" href="/css/login.css">
+    <link
+        rel="stylesheet"
+        href="/css/login.css"
+    >
+
 </head>
 
 <body>
 
-    <div class="login-page">
+<div class="login-page">
 
-        <div class="login-card">
+    <div class="login-card">
 
-            <div class="logo-container">
-                <img src="/images/logo.png" alt="Poliglota">
-            </div>
+        <div class="logo-container">
 
-            <div class="login-content">
+            <img
+                src="/images/logo.png"
+                alt="Poliglota"
+            >
 
-                <h1>Poliglota</h1>
+        </div>
 
-                <p class="subtitle">
-                    Interactive Learning Platform
-                </p>
+        <h1>Poliglota</h1>
 
-                <div class="divider"></div>
+        <div class="subtitle">
+            Interactive Learning Platform
+        </div>
 
-                <p class="access-text">
-                    This platform is protected.
-                    Enter your access password to continue.
-                </p>
+        <div class="divider"></div>
 
-                <form id="login-form">
+        <p class="description">
+            This platform is protected.
+            Enter your access password to continue.
+        </p>
 
-                    <div class="input-container">
+        <form id="login-form">
 
-                        <label for="password">
-                            Access Password
-                        </label>
+            <label for="password">
+                Access Password
+            </label>
 
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            autocomplete="current-password"
-                            required
-                        >
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+            >
 
-                    </div>
+            <button
+                type="submit"
+                id="login-button"
+            >
+                Access Platform
+            </button>
 
-                    <button type="submit" id="login-button">
-                        <span id="button-text">Access Platform</span>
-                        <span id="button-loader" class="loader"></span>
-                    </button>
+            <div id="error-message"></div>
 
-                    <div id="error-message"></div>
+        </form>
 
-                </form>
-
-            </div>
-
-            <div class="login-footer">
-                <span>Poliglota Angola</span>
-                <span>•</span>
-                <span>Secure Access</span>
-            </div>
-
+        <div class="footer">
+            Poliglota Angola
         </div>
 
     </div>
 
-    <script>
+</div>
 
-        const form = document.getElementById("login-form");
-        const passwordInput = document.getElementById("password");
-        const loginButton = document.getElementById("login-button");
-        const buttonText = document.getElementById("button-text");
-        const buttonLoader = document.getElementById("button-loader");
-        const errorMessage = document.getElementById("error-message");
 
-        form.addEventListener("submit", async function(event) {
+<script>
 
-            event.preventDefault();
+const form =
+    document.getElementById("login-form");
 
-            const password = passwordInput.value;
+const passwordInput =
+    document.getElementById("password");
 
-            if (!password) {
-                return;
+const loginButton =
+    document.getElementById("login-button");
+
+const errorMessage =
+    document.getElementById("error-message");
+
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    errorMessage.textContent = "";
+
+    loginButton.disabled = true;
+
+    loginButton.textContent = "Checking...";
+
+
+    try {
+
+        const response = await fetch(
+            "/api/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    password: passwordInput.value
+                })
             }
+        );
 
-            loginButton.disabled = true;
-            buttonText.style.display = "none";
-            buttonLoader.style.display = "inline-block";
-            errorMessage.textContent = "";
 
-            try {
+        const data =
+            await response.json();
 
-                const response = await fetch("/api/login", {
-                    method: "POST",
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+        if (response.ok && data.success) {
 
-                    body: JSON.stringify({
-                        password: password
-                    })
+            window.location.href = "/";
 
-                });
+            return;
+        }
 
-                const data = await response.json();
 
-                if (response.ok && data.success) {
+        errorMessage.textContent =
+            data.error || "Incorrect password.";
 
-                    window.location.href = "/";
+        passwordInput.value = "";
 
-                } else {
+        passwordInput.focus();
 
-                    errorMessage.textContent =
-                        data.error || "Incorrect password.";
+        loginButton.disabled = false;
 
-                    passwordInput.value = "";
-                    passwordInput.focus();
+        loginButton.textContent =
+            "Access Platform";
 
-                    loginButton.disabled = false;
-                    buttonText.style.display = "inline";
-                    buttonLoader.style.display = "none";
-                }
 
-            } catch (error) {
+    } catch (error) {
 
-                errorMessage.textContent =
-                    "Unable to connect. Please try again.";
+        errorMessage.textContent =
+            "Connection error. Please try again.";
 
-                loginButton.disabled = false;
-                buttonText.style.display = "inline";
-                buttonLoader.style.display = "none";
-            }
+        loginButton.disabled = false;
 
-        });
+        loginButton.textContent =
+            "Access Platform";
+    }
 
-    </script>
+});
+
+</script>
 
 </body>
 </html>
