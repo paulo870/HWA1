@@ -7,7 +7,116 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<!-- TEACHER PASSWORD PROTECTION -->
+<div id="password-screen">
 
+    <div id="password-box">
+
+        <h2>Teacher Access</h2>
+
+        <p>Please enter your password to access the teaching materials.</p>
+
+        <input
+            type="password"
+            id="teacher-password"
+            placeholder="Enter password"
+            autocomplete="off"
+        >
+
+        <button onclick="checkTeacherPassword()">
+            Enter
+        </button>
+
+        <p id="password-error"></p>
+
+    </div>
+
+</div>
+
+<style>
+    #password-screen {
+        position: fixed;
+        inset: 0;
+        background: #ffffff;
+        z-index: 999999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+    }
+
+    #password-box {
+        width: 90%;
+        max-width: 400px;
+        padding: 40px;
+        text-align: center;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+    }
+
+    #password-box input {
+        width: 100%;
+        padding: 12px;
+        margin: 15px 0;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    #password-box button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        background: #222;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #password-error {
+        color: red;
+        min-height: 20px;
+    }
+</style>
+
+<script>
+    function checkTeacherPassword() {
+
+        const password =
+            document.getElementById("teacher-password").value;
+
+        const error =
+            document.getElementById("password-error");
+
+        const correctPassword = "angola";
+
+        if (password === correctPassword) {
+
+            document.getElementById("password-screen").style.display = "none";
+
+            sessionStorage.setItem("poliglotaTeacherAccess", "true");
+
+        } else {
+
+            error.textContent = "Incorrect password.";
+        }
+    }
+
+
+    window.addEventListener("load", function() {
+
+        if (
+            sessionStorage.getItem("poliglotaTeacherAccess")
+            === "true"
+        ) {
+
+            document.getElementById("password-screen").style.display = "none";
+
+        }
+
+    });
+</script>
 <!-- Vertical control bar -->
 
 <div class="control-bar">
