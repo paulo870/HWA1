@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Access - Poliglota</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .access-box {
+            width: 90%;
+            max-width: 400px;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .access-box h1 {
+            margin-bottom: 10px;
+        }
+
+        .access-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        #password {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        #login-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #login-btn:hover {
+            opacity: 0.9;
+        }
+
+        #message {
+            margin-top: 15px;
+            color: #c00;
+            min-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="access-box">
+
+    <h1>Teacher Access</h1>
+
+    <p>Please enter your access password.</p>
+
+    <form id="login-form">
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Access password"
+            autocomplete="current-password"
+            required
+        >
+
+        <button type="submit" id="login-btn">
+            Enter
+        </button>
+
+    </form>
+
+    <div id="message"></div>
+
+</div>
+
+<script>
+
+document.getElementById("login-form").addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const password = document.getElementById("password").value;
+    const message = document.getElementById("message");
+    const button = document.getElementById("login-btn");
+
+    message.textContent = "";
+    button.disabled = true;
+    button.textContent = "Checking...";
+
+    try {
+
+        const response = await fetch("/api/login", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                password: password
+            })
+
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+
+            window.location.href = "/";
+
+        } else {
+
+            message.textContent = result.error || "Access denied.";
+
+        }
+
+    } catch (error) {
+
+        message.textContent = "Unable to connect to the server.";
+
+    }
+
+    button.disabled = false;
+    button.textContent = "Enter";
+
+});
+
+</script>
+
+</body>
+</html>
