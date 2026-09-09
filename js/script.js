@@ -169,10 +169,6 @@ function loadActivityUnit(unitNumber) {
 }
 
 
-
-
-
-
 // ==========================
 // DROPDOWN EVENTS
 // ==========================
@@ -659,110 +655,17 @@ const gamesHub =
 
 const gameCards =
     document.querySelectorAll(".game-card");
-    // ==========================
-// GAMES HUB TOGGLE
+  // ==========================
+// GAMES BUTTON
 // ==========================
 
 gamesBtn.addEventListener("click", function(e) {
 
     e.preventDefault();
-
     e.stopPropagation();
 
-    // TOGGLE
-    if (gamesHub.style.display === "grid") {
+    window.location.href = "https://play.poliglotaangola.com/";
 
-        gamesHub.style.display = "none";
-
-    } else {
-
-        gamesHub.style.display = "grid";
-    }
-});
-gamesHub.addEventListener("click", (e) => {
-
-    e.stopPropagation();
-});
-// ==========================
-// GAME BUTTONS
-// ==========================
-
-gameCards.forEach(card => {
-
-    card.addEventListener("click", () => {
-
-        const game =
-            card.getAttribute("data-game");
-
-        openGame(game);
-
-        /*
-        FUTURE:
-        open game window
-        load iframe
-        load html game
-        etc
-        */
-    });
-});
-// ==========================
-// HIDE GAMES HUB
-// ==========================
-
-window.addEventListener("click", () => {
-
-    gamesHub.style.display = "none";
-});
-// ==========================
-// GAME VIEWER SYSTEM
-// ==========================
-
-const gameViewer =
-    document.getElementById("game-viewer");
-
-const gameFrame =
-    document.getElementById("game-frame");
-
-const hideGameBtn =
-    document.getElementById("hide-game-btn");
-
-// OPEN GAME
-
-function openGame(gameName) {
-
-    gameViewer.style.display = "block";
-
-    hideGameBtn.style.display = "block";
-
-    // load game html
-    gameFrame.src =
-        `games/${gameName}/index.html`;
-}
-
-// CLOSE GAME
-
-hideGameBtn.addEventListener("click", () => {
-
-    gameViewer.style.display = "none";
-
-    hideGameBtn.style.display = "none";
-
-    // stop game
-    gameFrame.src = "";
-});
-
-// FULLSCREEN ON DOUBLE CLICK
-
-gameViewer.addEventListener("dblclick", () => {
-
-    if (!document.fullscreenElement) {
-
-        gameViewer.requestFullscreen();
-
-    } else {
-
-        document.exitFullscreen();
-    }
 });
 // ==========================
 // DRAWING TARGET SYSTEM (NEW CORE FIX)
