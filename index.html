@@ -604,25 +604,41 @@ window.addEventListener("load", function() {
 <div id="audio-list-container"></div>
 
 <!-- Audio player (hidden by default) -->
-<audio id="slide-audio" controls style="display:none;">
+<audio
+    id="slide-audio"
+    controls
+    controlsList="nodownload"
+    style="display:none;"
+>
     <source id="audio-source" src="" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
-<!-- Audio player (hidden by default) -->
-<audio id="slide-audio" controls style="display:none;">
-    <source id="audio-source" src="" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+
 <!-- Video player (hidden by default) -->
-<video id="slide-video" controls style="display:none; max-width:80%; max-height:70%; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2000;">
+<video
+    id="slide-video"
+    controls
+    style="display:none; max-width:80%; max-height:70%; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2000;"
+>
     <source id="video-source" src="" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 
 <!-- Hide Video Button -->
-<button id="hide-video-btn" style="display:none; position: fixed; top: 10%; left: 120px; z-index:2001; padding:4px 8px;">Hide Video</button>
-<!-- Hide Player Button -->
-<button id="hide-audio-btn" style="display:none; position: fixed; bottom: 90px; left: 120px; z-index:2001; padding:4px 8px;">Hide Player</button>
+<button
+    id="hide-video-btn"
+    style="display:none; position:fixed; top:10%; left:120px; z-index:2001; padding:4px 8px;"
+>
+    Hide Video
+</button>
+
+<!-- Hide Audio Button -->
+<button
+    id="hide-audio-btn"
+    style="display:none; position:fixed; bottom:90px; left:120px; z-index:2001; padding:4px 8px;"
+>
+    Hide Player
+</button>
 <!-- ==========================
      EDIT TRAY
 ========================== -->
