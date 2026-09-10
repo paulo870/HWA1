@@ -516,13 +516,18 @@ else {
         const trackNumber = track.split("_")[2]; // get number
         btn.textContent = `Audio ${trackNumber}`;
 
-        btn.addEventListener("click", () => {
-            const folder = bookType === "student" ? "student-book-audios" : "activity_book_audios";
-            audioSource.src = `audios/${folder}/unit_${unit}/${track}.mp3`;
-            audioPlayer.load();
-            showAudioPlayer(); // <-- use the new function
-            audioPlayer.controls = true;
-        });
+      btn.addEventListener("click", () => {
+    const folder = bookType === "student" ? "student-book-audios" : "activity_book_audios";
+
+    audioSource.src = `audios/${folder}/unit_${unit}/${track}.mp3`;
+
+    audioPlayer.load();
+
+    showAudioPlayer();
+
+    audioPlayer.controls = true;
+    audioPlayer.setAttribute("controlsList", "nodownload");
+});
 
         audioListContainer.appendChild(btn);
     });
